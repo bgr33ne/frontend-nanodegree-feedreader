@@ -29,7 +29,9 @@ var allFeeds = [
  */
 function init() {
     // Load the first feed we've defined (index of 0).
-    loadFeed(0);
+
+    //disabled app to read tests easier
+    //loadFeed(0);
 }
 
 /* This function performs everything necessary to load a
