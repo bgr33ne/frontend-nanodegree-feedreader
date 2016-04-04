@@ -101,22 +101,39 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-         it('loadfeed creates at least one entry element in feed container', function() {
-
+         beforeEach(function(done) {
+            loadFeed(0, done);
          });
 
+         it('loadfeed creates at least one entry element in feed container', function(done) {
+           var entriesLen = $('.feed .entry').length;
+           console.log('entriesLen ' + entriesLen);
+           expect(entriesLen).toBeGreaterThan(0);
+           done();
+         });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
-    describe('New Feed Selection', function() {
+    describe('New Feed Selection', function(done) {
 
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
-         it('new feed loaded has content that changes', function() {
+         * Remember, loadFeed() is asynchronous.*/
 
+         beforeEach(function(done) {
+           loadFeed(0, function() {
+             title = $('.feed .entry h2').html();
+             header = $('h1.header-title').html();
+             loadFeed(1, function() {
+               done();
+             });
+           });
+         });
+         it('new feed loaded has content that changes', function(done) {
+           expect($('.feed .entry h2').html()).not.toBe(title);
+           expect($('h1.header-title').html()).not.toBe(header);
+           done();
          });
 
     });
