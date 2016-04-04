@@ -68,12 +68,11 @@ $(function() {
         });
         //checks feed to see if entry element is created in feed container
         it(
-            'loadfeed creates at least one entry element in feed container',
-            function(done) {
+          'loadfeed creates at least one entry element in feed container',
+            function() {
                 var entriesLen = $('.feed .entry').length;
                 console.log('entriesLen ' + entriesLen);
                 expect(entriesLen).toBeGreaterThan(0);
-                done();
             });
         //restores orignal state
         afterAll(function(done) {
